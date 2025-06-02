@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🦁 U8 Maroon Lions 🏉</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1🦁 >U8 Maroon Lions 🏉 Game 6</h1>
+
+<!-- Add links to other repositories  class="active"   -->
+<ul class="nav-list">
+
+  <li><a href="https://mariebridgwood.github.io/Gallery">Home</a></li>
+
+</ul>
+
+
+
+  <div id="gallery" class="gallery"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" style="display:none;">
+    <span class="close">&times;</span>
+    <img src="" alt="Enlarged photo">
+    <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+    <button class="next" onclick="changeImage(1)">&#10095;</button>
+  </div>
+
+<script>
+  const imageList = [
+    "DSC_0169.JPG",
+ "DSC_0031.JPG",
+ "DSC_0009.JPG",
+ "DSC_0001.JPG",
+ "DSC_0054.JPG",
+ "DSC_0053.JPG",
+ "DSC_0016.JPG",
+ "DSC_0040.JPG",
+ "DSC_0067.JPG",
+ "DSC_0037.JPG",
+ "DSC_0035.JPG",
+ "DSC_0059.JPG",
+ "DSC_0068.JPG",
+ "DSC_0063.JPG",
+ "DSC_0062.JPG",
+ "DSC_0078.JPG",
+ "DSC_0076.JPG",
+ "DSC_0079.JPG",
+ "DSC_0084.JPG",
+ "DSC_0085.JPG",
+ "DSC_0086.JPG",
+ "DSC_0089.JPG",
+ "DSC_0090.JPG",
+ "DSC_0087.JPG",
+ "DSC_0093.JPG",
+ "DSC_0105.JPG",
+ "DSC_0100.JPG",
+ "DSC_0108.JPG",
+ "DSC_0107.JPG",
+ "DSC_0106.JPG",
+ "DSC_0114.JPG",
+ "DSC_0115.JPG",
+ "DSC_0208.JPG",
+ "DSC_0131.JPG",
+ "DSC_0212.JPG",
+ "DSC_0159.JPG",
+ "DSC_0164.JPG",
+ "DSC_0155.JPG",
+ "DSC_0130.JPG",
+ "DSC_0236.JPG",
+ "DSC_0144.JPG",
+ "DSC_0116.JPG",
+ "DSC_0225.JPG",
+ "DSC_0142.JPG",
+ "DSC_0132.JPG",
+ "DSC_0133.JPG",
+ "DSC_0154.JPG",
+ "DSC_0209.JPG",
+ "DSC_0163.JPG",
+ "DSC_0203.JPG",
+ "DSC_0200.JPG",
+ "DSC_0216.JPG",
+ "DSC_0139.JPG",
+ "DSC_0233.JPG",
+ "DSC_0149.JPG",
+ "DSC_0211.JPG",
+ "DSC_0201.JPG",
+ "DSC_0151.JPG",
+ "DSC_0148.JPG",
+ "DSC_0150.JPG",
+ "DSC_0230.JPG",
+ "DSC_0224.JPG",
+ "DSC_0147.JPG",
+ "DSC_0198.JPG",
+ "DSC_0195.JPG",
+ "DSC_0188.JPG",
+ "DSC_0181.JPG",
+ "DSC_0193.JPG",
+ "DSC_0166.JPG"
+  ];
+
+  const gallery = document.getElementById("gallery");
+  let currentImageIndex = 0;
+
+  // Add images to gallery
+  imageList.forEach((filename, index) => {
+    const photoDiv = document.createElement('div');
+    photoDiv.className = 'photo';
+    photoDiv.innerHTML = `
+      <img src="images/${filename}" alt="${filename}" data-index="${index}">
+      <a href="images/${filename}" download>Download</a>
+    `;
+    gallery.appendChild(photoDiv);
+  });
+
+  const lightbox = document.querySelector('.lightbox');
+  const lightboxImage = document.querySelector('.lightbox img');
+  const closeBtn = document.querySelector('.close');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+
+  lightboxImage.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightboxImage.classList.toggle('zoomed');
+  });
+
+  const thumbnails = document.querySelectorAll('.gallery img');
+
+  thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', openLightbox);
+  });
+
+  function openLightbox(event) {
+    event.preventDefault();
+    currentImageIndex = Number(event.target.dataset.index);
+    updateLightboxImage();
+    lightbox.style.display = 'flex';
+  }
+
+  function updateLightboxImage() {
+    lightboxImage.src = `images/${imageList[currentImageIndex]}`;
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  function changeImage(direction) {
+    currentImageIndex += direction;
+    if (currentImageIndex < 0) {
+      currentImageIndex = imageList.length - 1;
+    } else if (currentImageIndex >= imageList.length) {
+      currentImageIndex = 0;
+    }
+    updateLightboxImage();
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === closeBtn) {
+      closeLightbox();
+    }
+  });
+</script>
+
+
+</body>
+</html>
